@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medienpädagogik — Lernspiele für den Unterricht</title>
+<meta name="description" content="Vier kostenlose Lernspiele für den Unterricht: von den ersten Schritten im Computerdenken bis zum Faktencheck von KI-Texten und Social-Media-Videos. Ohne Anmeldung, direkt im Browser.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Medienpädagogik — Lernspiele für den Unterricht">
+<meta property="og:description" content="Vier kostenlose Lernspiele: Computerdenken, KI-Faktencheck und digitale Spurensuche. Ohne Anmeldung, direkt im Browser.">
+<meta property="og:url" content="https://dariusbaktus.github.io/medienpaedagogik/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+<style>
+  :root {
+    --gruen: #2f7d5d;
+    --gruen-hell: #47a67d;
+    --lila: #6b4ea8;
+    --lila-hell: #8f74c9;
+    --teal: #2a9d9c;
+    --gelb: #e0ad3c;
+    --beere: #b5527f;
+    --tinte: #23203a;
+    --grau: #5d5975;
+    --grau-hell: #8b87a3;
+    --papier: #ffffff;
+    --sanft: #f5f2fb;
+    --rand: #e7e1f3;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    color: var(--tinte);
+    background:
+      radial-gradient(1100px 620px at 12% -8%, #e4f2ea 0%, transparent 58%),
+      radial-gradient(950px 560px at 92% 4%, #eee7fa 0%, transparent 55%),
+      #fbfaff;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .huelle { max-width: 720px; margin: 0 auto; padding: 52px 20px 72px; }
+
+  /* ---------- Kopf ---------- */
+  header { text-align: center; margin-bottom: 34px; }
+
+  .abzeichen {
+    width: 78px; height: 78px; margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 38px; border-radius: 24px;
+    background: linear-gradient(135deg, var(--gruen) 0%, var(--teal) 48%, var(--lila) 100%);
+    box-shadow: 0 10px 26px rgba(107, 78, 168, .26);
+  }
+
+  h1 { margin: 0 0 10px; font-size: 33px; font-weight: 700; letter-spacing: -.02em; }
+
+  .unterzeile {
+    margin: 0 auto; max-width: 520px; font-size: 16.5px; color: var(--grau);
+  }
+
+  /* ---------- Erklärkasten ---------- */
+  .erklaerung {
+    background: var(--papier);
+    border: 1px solid var(--rand);
+    border-radius: 18px;
+    padding: 24px 26px;
+    margin: 30px 0 14px;
+    box-shadow: 0 2px 14px rgba(35, 32, 58, .05);
+  }
+
+  .erklaerung h2 {
+    margin: 0 0 11px; font-size: 12px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--lila);
+  }
+
+  .erklaerung p { margin: 0 0 13px; font-size: 15.5px; color: var(--grau); }
+  .erklaerung p:last-of-type { margin-bottom: 0; }
+
+  .merkmale {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--rand);
+  }
+
+  .merkmale span {
+    font-size: 13px; font-weight: 600; color: var(--gruen);
+    background: #e8f4ee; border: 1px solid #cfe7dc;
+    padding: 5px 12px; border-radius: 999px;
+  }
+
+  /* ---------- Abschnittstitel ---------- */
+  .abschnitt {
+    margin: 38px 0 14px; font-size: 12px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--grau-hell);
+  }
+
+  /* ---------- Spielkarten ---------- */
+  .spiel {
+    display: flex; gap: 17px; align-items: flex-start;
+    background: var(--papier);
+    border: 1px solid var(--rand);
+    border-radius: 18px;
+    padding: 21px 22px;
+    margin-bottom: 13px;
+    text-decoration: none; color: inherit;
+    box-shadow: 0 2px 12px rgba(35, 32, 58, .05);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    position: relative;
+  }
+
+  .spiel:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(35, 32, 58, .12);
+    border-color: var(--lila-hell);
+  }
+
+  .spiel:focus-visible { outline: 3px solid var(--gelb); outline-offset: 3px; }
+
+  .symbol {
+    flex: 0 0 54px; height: 54px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; border-radius: 16px;
+  }
+
+  .s-haustier   { background: linear-gradient(135deg, #e4f3ea, #cfe9dd); }
+  .s-rennen     { background: linear-gradient(135deg, #e2f2f2, #c9e7e6); }
+  .s-quellen    { background: linear-gradient(135deg, #eee8fa, #ddd0f2); }
+  .s-tiktok     { background: linear-gradient(135deg, #fbe9f1, #f4d4e3); }
+
+  .inhalt { flex: 1; min-width: 0; }
+
+  .inhalt h3 { margin: 0 0 3px; font-size: 18px; font-weight: 700; }
+
+  .kurz { margin: 0 0 9px; font-size: 14px; font-weight: 600; color: var(--lila); }
+
+  .inhalt p.text { margin: 0 0 12px; font-size: 14.5px; color: var(--grau); }
+
+  .marken { display: flex; flex-wrap: wrap; gap: 7px; }
+
+  .marken span {
+    font-size: 12px; font-weight: 600; color: var(--grau);
+    background: var(--sanft); border: 1px solid var(--rand);
+    padding: 3px 10px; border-radius: 999px;
+  }
+
+  .pfeil { flex: 0 0 auto; align-self: center; font-size: 19px; color: var(--lila-hell); }
+
+  /* ---------- Fuß ---------- */
+  footer {
+    margin-top: 42px; padding-top: 26px;
+    border-top: 1px solid var(--rand);
+    text-align: center; font-size: 13.5px; color: var(--grau-hell);
+  }
+
+  footer p { margin: 0 0 9px; }
+  footer a { color: var(--lila); font-weight: 600; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 560px) {
+    .huelle { padding: 38px 15px 56px; }
+    h1 { font-size: 27px; }
+    .spiel { padding: 18px; gap: 14px; }
+    .symbol { flex-basis: 46px; height: 46px; font-size: 22px; }
+    .pfeil { display: none; }
+    .erklaerung { padding: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spiel { transition: none; }
+    .spiel:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="huelle">
+
+  <header>
+    <div class="abzeichen" aria-hidden="true">🎓</div>
+    <h1>Medienpädagogik</h1>
+    <p class="unterzeile">
+      Vier Lernspiele für den Unterricht — vom ersten Verstehen, wie ein Computer denkt,
+      bis zum kritischen Prüfen von KI-Texten und Social-Media-Videos.
+    </p>
+  </header>
+
+  <section class="erklaerung">
+    <h2>Was ist das hier?</h2>
+    <p>
+      Eine kleine Sammlung von Lernspielen, die Kindern und Jugendlichen einen bewussten
+      Umgang mit digitalen Medien vermitteln. Jedes Spiel setzt an einem konkreten
+      Aha-Moment an, statt Regeln aufzuzählen.
+    </p>
+    <p>
+      Die beiden Spiele für Jüngere zeigen, dass ein Computer nichts errät, sondern
+      genau das tut, was man ihm sagt. Die beiden für Ältere drehen das um: Sie üben,
+      Inhalten <em>nicht</em> zu glauben — weder einer flüssig formulierten
+      KI-Zusammenfassung noch einem überzeugend wirkenden Video.
+    </p>
+    <p>
+      Gedacht für Schule, AGs und Projekttage — auf dem Whiteboard im Plenum,
+      auf Tablets in Gruppenarbeit oder einfach zu Hause.
+    </p>
+    <div class="merkmale">
+      <span>✓ Kostenlos</span>
+      <span>✓ Ohne Anmeldung</span>
+      <span>✓ Keine Installation</span>
+      <span>✓ Läuft im Browser</span>
+    </div>
+  </section>
+
+  <p class="abschnitt">Für Kita &amp; Grundschule</p>
+
+  <a class="spiel" href="https://dariusbaktus.github.io/klassenhaustier/">
+    <div class="symbol s-haustier" aria-hidden="true">🐹</div>
+    <div class="inhalt">
+      <h3>Klassenhaustier</h3>
+      <p class="kurz">Der Computer macht genau das, was du sagst</p>
+      <p class="text">
+        Kinder legen Symbolkarten in eine Reihe, das virtuelle Haustier führt sie exakt so aus.
+        Füttern klappt nur, wenn das Tier wirklich beim Napf steht — sonst passiert sichtbar
+        nichts. Ganz ohne Schimpfen wird spürbar: Genauigkeit und Reihenfolge entscheiden.
+      </p>
+      <div class="marken"><span>4–10 Jahre</span><span>15–30 Min.</span><span>Sequenz &amp; Präzision</span></div>
+    </div>
+    <div class="pfeil" aria-hidden="true">→</div>
+  </a>
+
+  <a class="spiel" href="Rennstrecke/">
+    <div class="symbol s-rennen" aria-hidden="true">🏎️</div>
+    <div class="inhalt">
+      <h3>Rennstrecke</h3>
+      <p class="kurz">Wie erkläre ich einem Computer den Weg?</p>
+      <p class="text">
+        Ein Kart fährt über eine Strecke, die sich in 2, dann 4, dann 8 Wege teilt. Bei einer
+        Gabelung reicht „links“ — bei zweien führen plötzlich zwei Wege nach links. Kinder
+        entdecken selbst, dass sie eine Reihenfolge angeben müssen.
+      </p>
+      <div class="marken"><span>5–10 Jahre</span><span>20–40 Min.</span><span>Entscheidungsbäume</span></div>
+    </div>
+    <div class="pfeil" aria-hidden="true">→</div>
+  </a>
+
+  <p class="abschnitt">Für die Sekundarstufe</p>
+
+  <a class="spiel" href="quellen-detektiv/">
+    <div class="symbol s-quellen" aria-hidden="true">🕵️</div>
+    <div class="inhalt">
+      <h3>Quellen-Detektiv</h3>
+      <p class="kurz">Was KI-Zusammenfassungen verschweigen und erfinden</p>
+      <p class="text">
+        Originaltext links, angebliche KI-Zusammenfassung rechts — dazwischen versteckte Fehler.
+        Aus 38.935 Befragten werden 3.800, aus „kein Zusammenhang nachweisbar“ wird ein Beleg.
+        Wer einmal selbst gesucht hat, glaubt Zusammenfassungen nicht mehr ungeprüft.
+      </p>
+      <div class="marken"><span>7.–9. Klasse</span><span>45–90 Min.</span><span>KI-Faktencheck</span></div>
+    </div>
+    <div class="pfeil" aria-hidden="true">→</div>
+  </a>
+
+  <a class="spiel" href="tiktok-detektiv/">
+    <div class="symbol s-tiktok" aria-hidden="true">📱</div>
+    <div class="inhalt">
+      <h3>TikTok-Detektiv</h3>
+      <p class="kurz">Was Videos über dich verraten, ohne dass du es merkst</p>
+      <p class="text">
+        Stimmt das Alibi? In einem nachgebauten Profil verraten Spiegelungen, Schatten,
+        Steckdosen und WLAN-Namen den wahren Ort. Am Ende dreht sich die Perspektive:
+        Genauso viel verraten die eigenen Videos.
+      </p>
+      <div class="marken"><span>7.–10. Klasse</span><span>45–90 Min.</span><span>OSINT &amp; Privatsphäre</span></div>
+    </div>
+    <div class="pfeil" aria-hidden="true">→</div>
+  </a>
+
+  <footer>
+    <p>Frei nutzbar für Unterricht und Bildungsarbeit.</p>
+    <p><a href="https://github.com/Dariusbaktus/medienpaedagogik">Quellcode &amp; Handreichungen auf GitHub</a></p>
+  </footer>
+
+</div>
+
+</body>
+</html>
