@@ -3,6 +3,9 @@
 Sammlung browserbasierter Lernspiele und Unterrichtswerkzeuge für die **Medienpädagogik** –
 von Computational Thinking im Grundschulalter bis zum Faktencheck in der Sekundarstufe.
 
+**▶ Direkt im Browser spielen: https://dariusbaktus.github.io/medienpaedagogik/**
+Ein Link für alle vier Spiele — zum Verschicken an Kolleginnen, Eltern oder die Klasse.
+
 Alle Projekte laufen ohne Installation, ohne Backend und ohne Login direkt im Browser
 (reines HTML/CSS/JavaScript) und sind damit für Klassenräume, Beamer und Tablets geeignet.
 
