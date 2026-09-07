@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rennstrecke - Klassentier Kart (Medienpädagogik)</title>
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <!-- Local Three.js r128 for 100% offline & reliable loading -->
+  <script src="js/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Direct WebGL Canvas Element -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- HUD & Overlay Controls -->
+  <div id="ui-overlay">
+    
+    <!-- Top Header & Level Bar -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <div class="app-title-card interactive">
+          <span>🏎️</span>
+          <h1>Rennstrecke</h1>
+        </div>
+
+        <div class="level-selector interactive">
+          <button class="level-btn" data-level="1">Stufe 1 (1 ➔ 2)</button>
+          <button class="level-btn active" data-level="2">Stufe 2 (2 ➔ 4)</button>
+          <button class="level-btn" data-level="3">Stufe 3 (4 ➔ 8)</button>
+        </div>
+      </div>
+
+      <div class="top-bar-right">
+        <!-- Compact Mission Target Banner -->
+        <div id="mission-banner" class="mission-card-compact interactive">
+          <!-- Dynamically filled by app.js -->
+        </div>
+
+        <button id="btn-toggle-camera" class="camera-toggle-btn interactive" title="Kamera wechseln">
+          <span>🎥</span>
+          <span id="camera-mode-label">3D Sicht</span>
+        </button>
+
+        <button id="btn-toggle-info" class="info-toggle-btn interactive" title="Erklärung ein/ausblenden">
+          <span>💡</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Floating Compact Pedagogical Note (Top-Right / Non-blocking) -->
+    <aside id="pedagogical-note" class="pedagogical-box-floating interactive">
+      <!-- Educational note / puzzle context -->
+    </aside>
+
+    <!-- Bottom Controls & Direction Card Bar -->
+    <footer class="bottom-controls">
+      
+      <!-- Sequence Tray -->
+      <div class="sequence-tray interactive">
+        <div class="tray-label">🗺️ Deine Route:</div>
+        <div id="cards-list" class="cards-container">
+          <!-- Dynamically populated card chips -->
+        </div>
+      </div>
+
+      <!-- Action & Direction Buttons -->
+      <div id="card-controls-panel" class="action-buttons interactive">
+        <button id="btn-add-left" class="btn-card-add btn-left">
+          <span>⬅️</span> Links
+        </button>
+        <button id="btn-add-right" class="btn-card-add btn-right">
+          Rechts <span>➡️</span>
+        </button>
+        <button id="btn-clear-cards" class="btn-card-add btn-clear" title="Karten löschen">
+          <span>🗑️</span>
+        </button>
+        <button id="btn-start-race" class="btn-card-add btn-start">
+          <span>🚀</span> LOS!
+        </button>
+      </div>
+
+    </footer>
+
+  </div>
+
+  <!-- Feedback / Mission Result Modal -->
+  <div id="feedback-modal" class="modal-overlay">
+    <div class="modal-card">
+      <h2 id="modal-title" class="modal-title">Super gemacht!</h2>
+      <div id="modal-msg" class="modal-msg"></div>
+      <div class="modal-actions">
+        <button id="modal-close-btn" class="modal-btn modal-btn-secondary">Nochmal probieren</button>
+        <button id="modal-next-btn" class="modal-btn modal-btn-primary">Nächste Mission 🏁</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Scripts -->
+  <script src="js/track.js?v=7"></script>
+  <script src="js/car.js?v=7"></script>
+  <script src="js/app.js?v=7"></script>
+</body>
+</html>

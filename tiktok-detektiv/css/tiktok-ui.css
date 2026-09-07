@@ -1,0 +1,747 @@
+/* ==========================================================================
+   TIKTOK APP SIMULATION STYLES
+   Pixel-accurate mobile UI for simulated social media feed & profile
+   ========================================================================== */
+
+:root {
+  --tt-black: #000000;
+  --tt-dark-bg: #121212;
+  --tt-card-bg: #1e1e1e;
+  --tt-pink: #fe2c55;
+  --tt-cyan: #25f4ee;
+  --tt-white: #ffffff;
+  --tt-gray: #8a8b91;
+  --tt-light-gray: #e1e2e7;
+  --tt-dark-gray: #2f2f2f;
+  --tt-comment-bg: #161823;
+  --tt-border: rgba(255, 255, 255, 0.12);
+}
+
+/* Smartphone Wrapper */
+.phone-mockup {
+  position: relative;
+  width: 380px;
+  max-width: 100%;
+  height: 760px;
+  background-color: var(--tt-black);
+  border-radius: 44px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 12px #22252a, 0 0 0 14px #3b4048;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  margin: 0 auto;
+}
+
+/* Phone Speaker & Dynamic Island */
+.phone-notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 26px;
+  background: #000000;
+  border-radius: 20px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+.notch-camera {
+  width: 10px;
+  height: 10px;
+  background: #111d2e;
+  border: 1px solid #1a2a3a;
+  border-radius: 50%;
+}
+
+.notch-speaker {
+  width: 40px;
+  height: 4px;
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+/* Phone Status Bar */
+.phone-status-bar {
+  height: 44px;
+  padding: 12px 24px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--tt-white);
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 90;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+}
+
+.phone-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* App Viewport */
+.phone-viewport {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--tt-black);
+}
+
+/* Screen Views (Feed vs. Profile) */
+.tt-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tt-screen.active {
+  display: flex;
+}
+
+/* TOP BAR (FEED) */
+.tt-top-bar {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 40;
+  color: var(--tt-white);
+}
+
+.tt-top-tabs {
+  display: flex;
+  gap: 16px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.tt-top-tab {
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  position: relative;
+}
+
+.tt-top-tab.active {
+  opacity: 1;
+}
+
+.tt-top-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  background: var(--tt-white);
+  border-radius: 2px;
+}
+
+.tt-top-icon {
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+/* VIDEO STAGE CONTAINER */
+.tt-video-container {
+  flex: 1;
+  position: relative;
+  background: #0a0a0c;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animated Interactive Video Render Canvas / SVG Area */
+.tt-video-canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hotspots overlay inside Video */
+.tt-hotspot {
+  position: absolute;
+  border: 2px dashed rgba(37, 244, 238, 0.7);
+  background: rgba(37, 244, 238, 0.15);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tt-hotspot:hover {
+  border-color: #ffe600;
+  background: rgba(255, 230, 0, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 230, 0, 0.6);
+}
+
+.tt-hotspot.inspected {
+  border: 2px solid #2ecc71;
+  background: rgba(46, 204, 113, 0.25);
+}
+
+.tt-hotspot-pin {
+  width: 28px;
+  height: 28px;
+  background: var(--tt-pink);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  animation: pulse-pin 1.8s infinite;
+}
+
+@keyframes pulse-pin {
+  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(254, 44, 85, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(254, 44, 85, 0); }
+  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(254, 44, 85, 0); }
+}
+
+/* RIGHT SIDE ACTIONS (TIKTOK SIDEBAR) */
+.tt-sidebar-actions {
+  position: absolute;
+  right: 12px;
+  bottom: 95px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 35;
+}
+
+.tt-avatar-btn {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--tt-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: #333;
+}
+
+.tt-avatar-add {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: var(--tt-pink);
+  border-radius: 50%;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tt-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: var(--tt-white);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.tt-action-btn:hover {
+  transform: scale(1.1);
+}
+
+.tt-action-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.tt-action-count {
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+/* ROTATING SOUND VINYL DISC */
+.tt-disc {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #222 35%, #000 70%, #444 100%);
+  border: 6px solid #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin-disc 4s linear infinite;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  cursor: pointer;
+}
+
+.tt-disc-inner {
+  font-size: 14px;
+}
+
+@keyframes spin-disc {
+  100% { transform: rotate(360deg); }
+}
+
+/* BOTTOM VIDEO INFO OVERLAY */
+.tt-bottom-overlay {
+  position: absolute;
+  left: 0;
+  bottom: 60px;
+  width: calc(100% - 75px);
+  padding: 16px 14px;
+  z-index: 35;
+  color: var(--tt-white);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+  pointer-events: none;
+}
+
+.tt-bottom-overlay * {
+  pointer-events: auto;
+}
+
+.tt-creator-tag {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.tt-caption {
+  font-size: 13px;
+  line-height: 1.35;
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+
+.tt-tags {
+  color: #fff;
+  font-weight: 600;
+}
+
+.tt-audio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+/* BOTTOM PHONE NAVIGATION BAR */
+.tt-bottom-nav {
+  height: 54px;
+  background: var(--tt-black);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 6px;
+  z-index: 50;
+}
+
+.tt-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--tt-gray);
+  font-size: 10px;
+  cursor: pointer;
+  transition: color 0.15s;
+  flex: 1;
+}
+
+.tt-nav-item.active {
+  color: var(--tt-white);
+  font-weight: 600;
+}
+
+.tt-nav-icon {
+  font-size: 20px;
+}
+
+/* TIKTOK PLUS CREATE BUTTON */
+.tt-create-btn {
+  position: relative;
+  width: 42px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tt-create-btn-bg {
+  position: absolute;
+  width: 38px;
+  height: 28px;
+  background: var(--tt-white);
+  border-radius: 8px;
+  box-shadow: -3px 0 0 var(--tt-cyan), 3px 0 0 var(--tt-pink);
+}
+
+.tt-create-btn span {
+  position: relative;
+  color: #000;
+  font-size: 18px;
+  font-weight: 900;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   PROFILE VIEW STYLES
+   ========================================================================== */
+
+.tt-profile-screen {
+  background: var(--tt-dark-bg);
+  overflow-y: auto;
+  color: var(--tt-white);
+  padding-bottom: 20px;
+}
+
+.tt-profile-header {
+  padding: 50px 16px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid var(--tt-border);
+}
+
+.tt-profile-avatar-wrapper {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(45deg, var(--tt-pink), var(--tt-cyan));
+  margin-bottom: 10px;
+}
+
+.tt-profile-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+}
+
+.tt-profile-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tt-profile-handle {
+  font-size: 13px;
+  color: var(--tt-gray);
+  margin-bottom: 14px;
+}
+
+.tt-profile-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.tt-stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tt-stat-val {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.tt-stat-label {
+  font-size: 11px;
+  color: var(--tt-gray);
+}
+
+.tt-profile-bio {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--tt-light-gray);
+  max-width: 90%;
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.tt-profile-actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.tt-btn-follow {
+  flex: 1;
+  background: var(--tt-pink);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 0;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.tt-btn-icon-sq {
+  width: 36px;
+  height: 36px;
+  background: var(--tt-dark-gray);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* PROFILE GRID TABS */
+.tt-grid-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--tt-border);
+}
+
+.tt-grid-tab {
+  flex: 1;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 18px;
+  color: var(--tt-gray);
+  cursor: pointer;
+  position: relative;
+}
+
+.tt-grid-tab.active {
+  color: var(--tt-white);
+}
+
+.tt-grid-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--tt-white);
+}
+
+/* 3-COLUMN VIDEO GRID */
+.tt-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding: 2px;
+}
+
+.tt-grid-item {
+  position: relative;
+  aspect-ratio: 3/4;
+  background: #1c1d22;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6px;
+  transition: opacity 0.15s;
+}
+
+.tt-grid-item:hover {
+  opacity: 0.85;
+}
+
+.tt-grid-item-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: var(--tt-pink);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.tt-grid-item-views {
+  position: relative;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* ==========================================================================
+   COMMENTS DRAWER MODAL (INSIDE PHONE)
+   ========================================================================== */
+
+.tt-comments-modal {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: var(--tt-comment-bg);
+  border-radius: 16px 16px 0 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tt-comments-modal.open {
+  transform: translateY(0);
+}
+
+.tt-comments-header {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tt-comments-close {
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--tt-gray);
+}
+
+.tt-comments-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tt-comment-item {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.tt-comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.tt-comment-body {
+  flex: 1;
+}
+
+.tt-comment-user {
+  font-size: 12px;
+  color: var(--tt-gray);
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tt-badge-author {
+  background: var(--tt-pink);
+  color: white;
+  font-size: 9px;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+.tt-comment-text {
+  color: var(--tt-light-gray);
+  line-height: 1.35;
+}
+
+.tt-comment-sus-highlight {
+  background: rgba(255, 230, 0, 0.15);
+  border-left: 3px solid #ffe600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.tt-comment-footer {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--tt-gray);
+  margin-top: 4px;
+}

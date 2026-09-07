@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Lokale Editor-/Tooling-Konfiguration (enthält absolute Pfade)
+.claude/
+
+# Eigenes Repository: https://github.com/Dariusbaktus/klassenhaustier
+klassenhaustier/

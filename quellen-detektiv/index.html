@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KI-Quellen-Detektiv & FactCheck Linktree</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Top Navigation -->
+    <header class="top-navbar">
+      <div class="brand-badge" id="nav-brand" title="Zurück zur Themenauswahl">
+        <div class="icon-logo">🕵️‍♂️</div>
+        <div>
+          <span>Quellen-Detektiv</span>
+          <span style="font-size: 0.72rem; display: block; color: var(--accent-cyan); font-weight: 500;">Medienkompetenz & KI-Check</span>
+        </div>
+      </div>
+
+      <nav class="nav-actions">
+        <button class="btn btn-secondary btn-sm" id="btn-nav-home">🏠 Themen</button>
+        <button class="btn btn-secondary btn-sm" id="btn-nav-editor">✏️ Lehrer-Editor</button>
+        <button class="btn btn-primary btn-sm" id="btn-nav-report" style="display: none;">📋 Auswertung (<span id="nav-findings-count">0</span>)</button>
+      </nav>
+    </header>
+
+    <!-- SECTION 1: THEMENAUSWAHL (HOME) -->
+    <main id="view-home" class="view-section active">
+      <div class="linktree-card">
+        <div class="linktree-avatar">🔗</div>
+        <h1 class="linktree-title">Trending Tech, Gaming & AI-News</h1>
+        <p class="linktree-subtitle">Digitale Quellensammlung für den Unterricht (7.–9. Klasse)</p>
+        <p class="linktree-desc">
+          Hier findest du aktuelle News-Artikel und Linktrees zu Themen wie Gaming, Video-KIs und Smartphone-Apps.
+          Die Kurzzusammenfassungen wurden automatisch von einer KI erstellt. Schau mal rein – vielleicht fallen dir beim Überfliegen der Originaltexte ja noch kleine Ungenauigkeiten auf!
+        </p>
+      </div>
+
+      <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: #fff;">Themen & Linktree-Kollektionen:</h2>
+      <div class="scenario-grid" id="scenario-list">
+        <!-- Dynamically rendered scenarios -->
+      </div>
+    </main>
+
+    <!-- SECTION 2: LINKTREE VIEW (SCHÜLER-HAUPTANSICHT) -->
+    <section id="view-linktree" class="view-section">
+      <div class="linktree-card" id="current-scenario-header">
+        <div class="linktree-avatar" id="scenario-avatar">📱</div>
+        <div class="badge badge-purple" id="scenario-category-badge" style="margin-bottom: 10px;">Kategorie</div>
+        <h1 class="linktree-title" id="scenario-title">Thema Titel</h1>
+        <p class="linktree-subtitle" id="scenario-subtitle">Untertitel</p>
+        <p class="linktree-desc" id="scenario-desc">Beschreibung</p>
+
+        <div class="detektiv-stats-bar">
+          <span>📖 Quellensammlung mit KI-Zusammenfassungen</span>
+          <span>•</span>
+          <span style="color: var(--accent-amber);">Notierte Auffälligkeiten: <strong id="linktree-total-findings">0</strong></span>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h2 style="font-size: 1.15rem; font-weight: 700; color: #fff;">Quellen & News-Links:</h2>
+        <button class="btn btn-success" id="btn-finish-challenge">📋 Übersicht & Fakten-Check ansehen</button>
+      </div>
+
+      <div class="source-tree" id="source-tree-container">
+        <!-- Dynamically rendered source links -->
+      </div>
+    </section>
+
+    <!-- SECTION 3: REPORT / REFLEXION VIEW -->
+    <section id="view-report" class="view-section">
+      <div class="report-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap;">
+          <div>
+            <div class="badge badge-green" style="margin-bottom: 8px;">Faktencheck Protokoll</div>
+            <h1 style="font-size: 1.6rem; font-weight: 800; color: #fff;" id="report-title">Detektiv-Auswertung</h1>
+            <p style="color: var(--text-muted);" id="report-subtitle">Ergebnisse deines Quellenabgleichs</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-secondary btn-sm" id="btn-print-report" onclick="window.print()">🖨️ Drucken / PDF</button>
+            <button class="btn btn-secondary btn-sm" id="btn-back-to-tree">🔙 Zurück zum Linktree</button>
+          </div>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 20px 0;">
+
+        <div style="background: var(--bg-subtle); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 24px;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--accent-cyan);">📊 Deine Funde im Überblick</h3>
+          <p id="report-summary-text" style="color: var(--text-muted); font-size: 0.95rem;">Du hast insgesamt X Fehler markiert.</p>
+          <div id="report-findings-list" class="findings-feed" style="margin-top: 14px;">
+            <!-- Findings rendered here -->
+          </div>
+        </div>
+
+        <!-- Auflösungs-Bereich (Musterlösung / KI-Realität) -->
+        <div class="reveal-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff;">🔍 Der Abgleich: Was hat die KI wirklich getan?</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">Decke auf, welche Fehler und Halluzinationen in den KI-Texten versteckt waren.</p>
+            </div>
+            <button class="btn btn-primary" id="btn-toggle-reveal">👁️ Auflösung aufdecken</button>
+          </div>
+
+          <div id="reveal-content" style="display: none; margin-top: 20px;">
+            <div id="reveal-sources-list">
+              <!-- Known errors rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Pädagogische Reflexionsfragen -->
+        <div style="margin-top: 28px; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: var(--radius-md); padding: 20px;">
+          <h3 style="font-size: 1.1rem; color: #c4b5fd; margin-bottom: 12px;">🧠 Fragen für die Klassendiskussion:</h3>
+          <ul style="padding-left: 20px; font-size: 0.92rem; color: #e5e7eb; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Der Überzeugungs-Effekt:</strong> Warum klingen KI-Zusammenfassungen oft so glaubwürdig, selbst wenn sie komplett erfundene Zahlen enthalten?</li>
+            <li><strong>Erfundene Quellen:</strong> Wie können wir überprüfen, ob ein genannter Autor oder eine zitierte Studie überhaupt existiert?</li>
+            <li><strong>Goldene Regel:</strong> Worauf wirst du in Zukunft achten, wenn du ChatGPT oder andere KIs für Schulreferate verwendest?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: LEHRER EDITOR VIEW -->
+    <section id="view-editor" class="view-section">
+      <div class="linktree-card">
+        <div class="linktree-avatar">⚙️</div>
+        <h1 class="linktree-title">Lehrer-Editor & Szenario-Verwaltung</h1>
+        <p class="linktree-subtitle">Eigene Themen & Linktree-Aufgaben für den Unterricht erstellen</p>
+        <p class="linktree-desc">Erstelle eigene Quellenlisten mit absichtlich fehlerhaften oder echten KI-Zusammenfassungen für deine Klasse.</p>
+      </div>
+
+      <div class="report-card">
+        <h2 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; color: #fff;">Neues Thema / Linktree anlegen</h2>
+
+        <form id="editor-form">
+          <div class="form-group">
+            <label class="form-label">Thema / Titel</label>
+            <input type="text" class="form-control" id="ed-title" placeholder="z.B. 🌍 Klimawandel & Energiewende im Faktencheck" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Untertitel / Fragestellung</label>
+            <input type="text" class="form-control" id="ed-subtitle" placeholder="z.B. Was stimmt wirklich bei E-Fuels und Windkraft?" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Kategorie / Fach</label>
+            <input type="text" class="form-control" id="ed-category" placeholder="z.B. Naturwissenschaften / Medienkunde" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Beschreibung / Arbeitsauftrag</label>
+            <textarea class="form-control" id="ed-desc" placeholder="Auftrag an die Schülerinnen und Schüler..."></textarea>
+          </div>
+
+          <hr style="border: none; border-top: 1px solid var(--border-color); margin: 24px 0;">
+
+          <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 12px;">Quellen für diesen Linktree:</h3>
+          <div id="ed-sources-container" style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Source items for editing -->
+          </div>
+
+          <div style="margin-top: 16px;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-add-source-field">➕ Weitere Quelle hinzufügen</button>
+          </div>
+
+          <div style="margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <button type="submit" class="btn btn-primary">💾 Szenario speichern & bereitstellen</button>
+            <button type="button" class="btn btn-secondary" id="btn-export-json">📤 Als JSON exportieren</button>
+            <button type="button" class="btn btn-secondary" id="btn-import-json">📥 JSON importieren</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- INSPECTOR MODAL (SIDE-BY-SIDE QUELLEN-ABGLEICH) -->
+    <div class="modal-overlay" id="inspector-modal">
+      <div class="inspector-modal">
+        <div class="inspector-header">
+          <div>
+            <span class="badge badge-cyan" id="modal-badge">Studie</span>
+            <h2 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-top: 4px;" id="modal-source-title">Quellentitel</h2>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-close-inspector">✖ Schließen</button>
+        </div>
+
+        <div class="inspector-body">
+          <!-- Linke Seite: Originaltext -->
+          <div class="doc-pane">
+            <div class="doc-pane-header">
+              <span class="doc-pane-title">📄 Originalquelle (Echter Text)</span>
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <button class="btn btn-secondary btn-sm btn-tts" id="btn-tts-original" title="Originaltext vorlesen">🔊 Vorlesen</button>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" id="modal-external-link">🌐 Webseite</a>
+              </div>
+            </div>
+            <div class="doc-text" id="modal-original-text">
+              Lade Originaltext...
+            </div>
+          </div>
+
+          <!-- Rechte Seite: KI-Zusammenfassung mit Markierungs-Tool -->
+          <div class="doc-pane">
+            <div class="doc-pane-header">
+              <span class="doc-pane-title" style="color: #c4b5fd;">🤖 KI-Zusammenfassung</span>
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <button class="btn btn-secondary btn-sm btn-tts" id="btn-tts-ai" title="KI-Zusammenfassung vorlesen">🔊 Vorlesen</button>
+                <span class="badge badge-amber" id="modal-finding-badge">0 Funde</span>
+              </div>
+            </div>
+
+            <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px;">
+              💡 <strong>Tipp:</strong> Markiere verdächtigen Text mit der Maus/dem Finger, um einen Fehler einzutragen.
+            </p>
+
+            <div class="ai-text-container">
+              <div class="doc-text" id="modal-ai-text">
+                Lade KI-Text...
+              </div>
+
+              <!-- Selection Bubble -->
+              <div class="selection-action-bubble" id="selection-bubble">
+                ⚠️ Fehler markieren
+              </div>
+            </div>
+
+            <!-- Liste der bisherigen Funde für diese Quelle -->
+            <div style="margin-top: 14px;">
+              <h4 style="font-size: 0.88rem; font-weight: 700; color: #fff;">Deine markierten Unstimmigkeiten:</h4>
+              <div class="findings-feed" id="modal-findings-list">
+                <!-- Findings dynamically added -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POPUP MODAL: FEHLER LOGGEN -->
+    <div class="modal-overlay" id="finding-form-modal" style="z-index: 1100;">
+      <div style="background: var(--bg-card); border: 1px solid var(--accent-purple); border-radius: var(--radius-md); max-width: 480px; width: 100%; padding: 24px; box-shadow: var(--shadow-card);">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 12px;">🚨 Unstimmigkeit melden</h3>
+        
+        <div style="margin-bottom: 14px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-amber);">
+          <div style="font-size: 0.75rem; color: var(--text-dim);">Markierte Textstelle:</div>
+          <div style="font-size: 0.88rem; font-style: italic; color: #fde68a;" id="popover-quote">...</div>
+        </div>
+
+        <form id="finding-form">
+          <div class="form-group">
+            <label class="form-label">Art des Fehlers:</label>
+            <select class="form-control" id="popover-type" required>
+              <option value="🔢 Zahlen verdreht / Falsche Statistik">🔢 Zahlen verdreht / Falsche Statistik</option>
+              <option value="🤥 Frei erfunden / KI-Halluzination">🤥 Frei erfunden / KI-Halluzination</option>
+              <option value="🔄 Aussage ins Gegenteil verkehrt">🔄 Aussage ins Gegenteil verkehrt</option>
+              <option value="🏷️ Falsche Quelle / Falscher Autor">🏷️ Falsche Quelle / Falscher Autor</option>
+              <option value="📅 Veraltet / Falsches Datum">📅 Veraltet / Falsches Datum</option>
+              <option value="❓ Sonstiger Fehler">❓ Sonstiger Fehler</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Deine Begründung (Was steht wirklich im Original?):</label>
+            <textarea class="form-control" id="popover-note" placeholder="z.B. Im Original steht 1,5 Stunden, die KI behauptet aber 4 Stunden..." required></textarea>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-cancel-finding">Abbrechen</button>
+            <button type="submit" class="btn btn-primary btn-sm">💾 Speichern</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Quellen-Detektiv • Interaktives Tool für Medienpädagogik & KI-Kompetenz</p>
+    </footer>
+  </div>
+
+  <script src="js/scenarios.js"></script>
+  <script src="js/detector.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
