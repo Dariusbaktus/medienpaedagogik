@@ -43,7 +43,7 @@
     <section class="stage-pane">
       <div class="stage-instructions">
         <span>💡</span>
-        <div><b>Tipp:</b> Klicke auf <b>🔍 Lupen</b> im Video, die <b>🎧 Tonspur</b> oder <b>💬 Kommentare</b>, um versteckte Beweise zu sichern!</div>
+        <div><b>Tipp:</b> Nutze <b>▲ / ▼</b> zum Wechseln der Videos. Klicke auf <b>🔍 Lupen</b>, <b>🎧 Audio</b> oder <b>💬 Kommentare</b>, um Beweise zu sichern!</div>
       </div>
 
       <!-- Smartphone Mockup Frame -->
@@ -79,9 +79,16 @@
               <span class="tt-top-icon">🔍</span>
             </div>
 
+            <!-- Video Navigation Overlay (Up / Down chevrons & counter) -->
+            <div class="tt-feed-nav-overlay">
+              <button class="tt-nav-chevron" id="feed-prev-btn" title="Vorheriges Video (Pfeil nach oben)">▲</button>
+              <div class="tt-video-counter-badge" id="feed-video-counter">Video 1 / 3</div>
+              <button class="tt-nav-chevron" id="feed-next-btn" title="Nächstes Video (Pfeil nach unten)">▼</button>
+            </div>
+
             <!-- Video Container / Canvas Stage -->
             <div class="tt-video-container" id="video-canvas-container">
-              <!-- Video visuals & hotspots injected here -->
+              <!-- High-res photo & interactive hotspots injected here -->
             </div>
 
             <!-- Right Sidebar Actions -->
@@ -130,7 +137,7 @@
             <!-- In-Phone Comments Drawer Modal -->
             <div class="tt-comments-modal" id="comments-modal">
               <div class="tt-comments-header">
-                <span>Kommentare & Reaktionen</span>
+                <span>Kommentare & Zeugenaussagen</span>
                 <span class="tt-comments-close" id="comments-close-btn">✕</span>
               </div>
               <div class="tt-comments-list" id="comments-list">
@@ -180,7 +187,7 @@
                 <div class="tt-grid-tab">❤️</div>
               </div>
 
-              <!-- 3-Column Video Thumbnail Grid -->
+              <!-- 3-Column Video Thumbnail Grid with real photos -->
               <div class="tt-video-grid" id="profile-video-grid">
                 <!-- Video thumbnails injected via JS -->
               </div>
@@ -259,7 +266,7 @@
       <div class="verdict-bar">
         <div class="verdict-info">
           <h4>Bereit für das Urteil?</h4>
-          <p>Überprüfe, ob alle Aussagen bewertet und stichhaltige Beweise angeheftet wurden.</p>
+          <p>Bewerte alle Aussagen als Lüge oder Wahrheit und hefte Beweise an.</p>
         </div>
         <button class="btn-submit-verdict" id="btn-submit-verdict">
           <span>🕵️‍♂️ Fall lösen & Urteil fällen</span>
@@ -278,6 +285,10 @@
         <button class="modal-close" id="inspector-close-btn">✕</button>
       </div>
       <div class="inspector-body">
+        
+        <!-- High-res Image Zoom Preview -->
+        <div id="inspector-image-preview" style="display: none;"></div>
+
         <span class="clue-category-tag" id="inspector-category">Kategorie</span>
         <div class="inspector-desc" id="inspector-desc">Beschreibung des Fundstücks...</div>
         
@@ -293,8 +304,9 @@
       </div>
       <div class="inspector-footer">
         <span style="font-size: 12px; color: #8b949e; align-self: center; margin-right: auto;">Als Beweis anheften:</span>
-        <button class="btn-pin-clue" id="btn-pin-stmt-1">📌 An Aussage 1</button>
-        <button class="btn-pin-clue" id="btn-pin-stmt-2">📌 An Aussage 2</button>
+        <div id="inspector-pin-buttons" style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <!-- Dynamically populated buttons -->
+        </div>
       </div>
     </div>
   </div>
@@ -315,7 +327,7 @@
         <!-- Detailed Feedback on Statements -->
         <div class="verdict-explanation-box">
           <h4>📋 Detaillierte Fallauflösung:</h4>
-          <ul id="verdict-feedback-list"></ul>
+          <ul id="verdict-feedback-list" style="list-style: none; padding-left: 0;"></ul>
         </div>
 
         <!-- Educational Debriefing & Takeaways -->
@@ -338,7 +350,5 @@
   <script src="js/detective-board.js"></script>
   <script src="js/editor.js"></script>
   <script src="js/app.js"></script>
-  <!-- Info-Reiter: erklaert das Spiel beim ersten Aufruf -->
-  <script src="js/info-overlay.js"></script>
 </body>
 </html>

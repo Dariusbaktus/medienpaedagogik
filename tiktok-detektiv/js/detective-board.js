@@ -61,6 +61,12 @@ window.DetectiveBoard = {
     let total = 0;
     this.activeCase.videos.forEach(v => {
       if (v.hotspots) total += v.hotspots.length;
+      if (v.audioTrack) total += 1;
+      if (v.comments) {
+        v.comments.forEach(c => {
+          if (c.isSus) total += 1;
+        });
+      }
     });
     return total;
   },
@@ -119,7 +125,7 @@ window.DetectiveBoard = {
       const pinned = this.pinnedClues[stmt.id] || [];
       let pinnedHtml = '';
       if (pinned.length === 0) {
-        pinnedHtml = '<div class="empty-clues-placeholder">📌 Noch keine Beweise angeheftet. Untersuche Videos/Kommentare und hefte Indizien an!</div>';
+        pinnedHtml = '<div class="empty-clues-placeholder">📌 Noch keine Beweise angeheftet. Klicke auf Lupen oder Audio im Video, um Indizien hier anzupinnen!</div>';
       } else {
         pinned.forEach(clue => {
           pinnedHtml += `
@@ -137,7 +143,7 @@ window.DetectiveBoard = {
           ${statusBadge}
         </div>
         <div>
-          <div style="font-size: 11px; color: #8b949e; margin-bottom: 4px; font-weight: 600;">📎 Angeheftete Beweise & Indizien:</div>
+          <div style="font-size: 11px; color: #8b949e; margin-bottom: 4px; font-weight: 600;">📎 Angeheftete Beweise:</div>
           <div class="pinned-clues-container" id="pinned-container-${stmt.id}">
             ${pinnedHtml}
           </div>
@@ -157,7 +163,7 @@ window.DetectiveBoard = {
 
     // Attach Event Listeners
     container.querySelectorAll('.btn-decision').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         const stmtId = btn.dataset.stmtId;
         const decision = btn.dataset.decision;
         this.setUserDecision(stmtId, decision);
@@ -166,7 +172,7 @@ window.DetectiveBoard = {
     });
 
     container.querySelectorAll('.remove-clue').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         const stmtId = btn.dataset.stmtId;
         const clueId = btn.dataset.clueId;
         this.removeClueFromStatement(stmtId, clueId);

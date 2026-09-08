@@ -1,6 +1,6 @@
 /**
  * TikTok-Detektiv: Alibi-Check
- * Fälle-Datenbank (Didaktisch geprüfte Fälle mit logischen Hinweisen & Beweisketten)
+ * Fälle-Datenbank mit echten, hochauflösenden Hinweis-Fotos & didaktischen Beweisen
  */
 
 window.TIKTOK_CASES = [
@@ -29,14 +29,14 @@ window.TIKTOK_CASES = [
         id: "stmt-1",
         claim: "„Ich war gestern ab 14:00 Uhr bis abends bei meiner Oma in Hamburg-Bergedorf und hatte dort im Keller kein Internet.“",
         isLie: true,
-        contradictionReason: "Die gelbe Berliner Straßenbahn M10 in der Fensterspiegelung, die Berliner U-Bahn-Ansage (Eberswalder Str.), der Sonnenschein statt Hamburger Dauerregen und das aktive Schul-WLAN im Screenshot beweisen zweifelsfrei, dass Leo in Berlin an der Schule war.",
+        contradictionReason: "Die gelbe Berliner Straßenbahn M10 vor dem Fenster, die Berliner U-Bahn-Ansage (Eberswalder Str.), der Sonnenschein statt Hamburger Dauerregen und das aktive Schul-WLAN im Screenshot beweisen zweifelsfrei, dass Leo in Berlin an der Schule war.",
         requiredClues: ["clue-tram-reflection", "clue-audio-subway", "clue-wifi-screenshot", "clue-sun-weather"]
       },
       {
         id: "stmt-2",
         claim: "„Meinen gelben Hoodie habe ich schon vor zwei Wochen verloren und trage seitdem nur noch schwarze Jacken.“",
         isLie: true,
-        contradictionReason: "In seinem Spiegelselfie-Video von vor nur 2 Tagen trägt er stolz genau diesen gelben Hoodie mit dem rot-blauen Skater-Patch am Ärmel.",
+        contradictionReason: "In seinem Spiegelselfie-Video von vor nur 2 Tagen trägt er stolz genau diesen gelben Hoodie mit dem rot-blauen Skater-Patch am Ärmel und weiß-roten Sneakern.",
         requiredClues: ["clue-hoodie-patch"]
       }
     ],
@@ -51,7 +51,7 @@ window.TIKTOK_CASES = [
         shares: "14",
         music: "Lofi Beats - Autumn Vibe 🍂",
         caption: "Grüße aus dem Norden bei Oma 🍵 #chill #hamburg #vibe #cozy #teatime",
-        sceneType: "window_berlin",
+        imageSrc: "assets/images/leo_window_berlin.jpg",
         audioTrack: {
           type: "subway",
           label: "🎧 U-Bahn-Ansage im Hintergrund",
@@ -60,23 +60,23 @@ window.TIKTOK_CASES = [
         hotspots: [
           {
             id: "clue-tram-reflection",
-            x: 70,
-            y: 36,
-            width: 26,
-            height: 25,
-            label: "Fensterspiegelung (BVG M10)",
-            description: "🔍 Reflexion im Fenster: In der Glasscheibe spiegelt sich die gelbe Straßenbahn der Linie ‚M10 Warschauer Straße‘ – eine Berliner Tram-Linie!",
-            category: "Reflexion & Landmarke",
+            x: 6,
+            y: 43,
+            width: 46,
+            height: 18,
+            label: "Gelbe BVG-Straßenbahn (M10)",
+            description: "🔍 Straßenbahn im Hintergrund: Draußen fährt eine gelbe Berliner Tram der BVG (Linie M10) vorbei – eine weltbekannte Berliner Straßenbahnlinie, die es in Hamburg nicht gibt!",
+            category: "Landmarke & Verkehr",
             relevance: "Widerlegt Aussage 1 (Ort: Berlin statt Hamburg)"
           },
           {
             id: "clue-sun-weather",
-            x: 20,
-            y: 15,
-            width: 32,
-            height: 22,
-            label: "Sonnenschein & Schatten",
-            description: "☀️ Wetter-Abgleich: Durchs Fenster fällt tief stehende Herbstsonne aus Westen. Der amtliche Wetterbericht für Hamburg meldete an diesem Nachmittag Dauerregen und dichten Nebel.",
+            x: 44,
+            y: 70,
+            width: 28,
+            height: 20,
+            label: "Sonnenschein & Schattenwinkel",
+            description: "☀️ Wetter & Sonnenstand: Durchs Fenster fällt tief stehende Nachmittagssonne aus Westen mit langen Schatten auf Fensterbank und Straße. Der amtliche Wetterbericht für Hamburg meldete an diesem Nachmittag dichten Dauerregen!",
             category: "Wetter & Licht",
             relevance: "Widerlegt Aussage 1 (Wetter passt nicht zu Hamburg)"
           }
@@ -97,16 +97,16 @@ window.TIKTOK_CASES = [
         shares: "2",
         music: "Originalton - @leo.vibez",
         caption: "Wenn man bei Oma im Funkloch sitzt 💀 #nophone #offline #bored",
-        sceneType: "phone_screenshot",
+        imageSrc: "assets/images/leo_phone_screenshot.jpg",
         hotspots: [
           {
             id: "clue-wifi-screenshot",
-            x: 58,
-            y: 2,
-            width: 40,
-            height: 12,
+            x: 62,
+            y: 4,
+            width: 30,
+            height: 8,
             label: "WLAN-Statusleiste (Schule_Gast_5G)",
-            description: "📶 Statusleiste: Oben rechts ist volles 5G-Signal und das verbundene WLAN ‚Schule_Gast_5G‘ zu sehen. Leo war zur Tatzeit im Schul-Netzwerk eingeloggt!",
+            description: "📶 Statusleiste: Oben rechts ist volles 5G-Signal und das verbundene WLAN ‚Schule_Gast_5G‘ zu sehen (Akku bei 88%). Leo war zur Tatzeit im Schul-Netzwerk eingeloggt!",
             category: "Metadaten & Netzwerke",
             relevance: "Widerlegt Aussage 1 (Funkloch & Standort)"
           }
@@ -125,18 +125,29 @@ window.TIKTOK_CASES = [
         shares: "35",
         music: "Bass Boosted Skate Vibe",
         caption: "Lieblings-Hoodie sitzt immer noch 🔥 #outfit #skate #yellow #ootd",
-        sceneType: "mirror_selfie",
+        imageSrc: "assets/images/leo_mirror_selfie.jpg",
         hotspots: [
           {
             id: "clue-hoodie-patch",
-            x: 26,
-            y: 42,
-            width: 35,
-            height: 30,
+            x: 38,
+            y: 34,
+            width: 12,
+            height: 8,
             label: "Gelber Hoodie mit Skater-Patch",
-            description: "🧥 Kleidung: Leo trägt den gelben Hoodie mit dem rot-blauen Skater-Patch am linken Ärmel vor 2 Tagen – er hat ihn also keineswegs vor 2 Wochen verloren!",
+            description: "🧥 Kleidung: Leo trägt den gelben Hoodie mit dem runden Skater-Patch am Ärmel vor nur 2 Tagen – er hat ihn also keineswegs vor 2 Wochen verloren!",
             category: "Kontinuität & Kleidung",
             relevance: "Widerlegt Aussage 2 (Hoodie angeblich verloren)"
+          },
+          {
+            id: "clue-sneakers",
+            x: 35,
+            y: 80,
+            width: 32,
+            height: 15,
+            label: "Rot-weiße Sneaker",
+            description: "👟 Schuhe: Leo trägt exakt die rot-weißen High-Top Sneaker, die auch von der Überwachungskamera im Lehrerzimmer gefilmt wurden.",
+            category: "Spuren & Kleidung",
+            relevance: "Bestätigt die Täterbeschreibung"
           }
         ],
         comments: [
@@ -183,7 +194,7 @@ window.TIKTOK_CASES = [
         id: "stmt-2",
         claim: "„Das 10.000€ Luxus-Uhren-Giveaway ist 100% echt und wurde heute frisch in der Dubai Mall Bar bezahlt!“",
         isLie: true,
-        contradictionReason: "Auf der Quittung steht 'inkl. 19% deutsche MwSt.' von vor 6 Monaten aus Frankfurt, und in der Uhrenspiegelung ist das Logo eines Frankfurter Flughafen-Hotels zu sehen.",
+        contradictionReason: "Auf der Quittung steht 'inkl. 19% deutsche MwSt.' von vor 6 Monaten aus Frankfurt, und im Hintergrund liegt die Info-Mappe des 'Airport Hotel Regent Frankfurt'.",
         requiredClues: ["clue-receipt-tax", "clue-hotel-reflection"]
       }
     ],
@@ -198,7 +209,7 @@ window.TIKTOK_CASES = [
         shares: "189",
         music: "Luxury Lifestyle Lounge Vibe",
         caption: "Beste Aussicht über die Palm Jumeirah ☀️ Kein Ort der Welt ist schöner! #dubai #luxury #penthouse #palm #lifestyle",
-        sceneType: "dubai_balcony_fake",
+        imageSrc: "assets/images/luna_balcony_fake.jpg",
         audioTrack: {
           type: "siren",
           label: "🎧 Sirene im Hintergrund anhören",
@@ -207,10 +218,10 @@ window.TIKTOK_CASES = [
         hotspots: [
           {
             id: "clue-schuko-plug",
-            x: 10,
-            y: 70,
-            width: 22,
-            height: 18,
+            x: 6,
+            y: 40,
+            width: 18,
+            height: 12,
             label: "Deutsche Wandsteckdose (Typ F)",
             description: "🔌 Steckdosentyp: An der Wand ist eine Standard-Schukosteckdose (Typ F, Deutschland/EU) installiert. In den VAE/Dubai sind gesetzlich ausschließlich britische 3-Pin-Steckdosen (Typ G) verbaut!",
             category: "Infrastruktur & Technik",
@@ -218,10 +229,10 @@ window.TIKTOK_CASES = [
           },
           {
             id: "clue-oak-leaves",
-            x: 76,
+            x: 42,
             y: 18,
-            width: 22,
-            height: 25,
+            width: 36,
+            height: 35,
             label: "Mitteleuropäische Eichenblätter",
             description: "🍃 Vegetation: Am Fensterrand wehen Zweige einer heimischen Stieleiche mit gezackten grünen Blättern. Eichen wachsen nicht frei im Wüstenklima von Dubai!",
             category: "Geografie & Umwelt",
@@ -244,28 +255,28 @@ window.TIKTOK_CASES = [
         shares: "940",
         music: "Hype Trap Beats 2026",
         caption: "Für meine treuesten Follower! Frisch eingekauft 💎 Schreibt 'LUXUS' in die Kommentare um teilzunehmen! #giveaway #rolex #dubaimall",
-        sceneType: "watch_unboxing",
+        imageSrc: "assets/images/luna_watch_unboxing.jpg",
         hotspots: [
           {
             id: "clue-receipt-tax",
-            x: 12,
-            y: 55,
-            width: 36,
-            height: 25,
+            x: 52,
+            y: 56,
+            width: 44,
+            height: 38,
             label: "Kassenbon mit 19% deutscher MwSt.",
-            description: "🧾 Quittungsdetails: Auf dem Beleg steht 'inkl. 19% MwSt. EUR' und ein Kaufdatum von vor 6 Monaten (März) aus einem Juwelier in Frankfurt am Main!",
+            description: "🧾 Quittungsdetails: Auf dem Beleg steht 'LUXUS UHRMACHER FRANKFURT', '14.03.2024 FRANKFURT AM MAIN' und 'MwSt. 19% EUR'!",
             category: "Dokumente & Rechnungen",
             relevance: "Widerlegt Aussage 2 (Weder heute noch in Dubai gekauft)"
           },
           {
             id: "clue-hotel-reflection",
-            x: 50,
-            y: 32,
-            width: 28,
-            height: 28,
-            label: "Spiegelung im Uhrenglas",
-            description: "🏨 Spiegelung: Im gewölbten Uhrenglas spiegelt sich die Konferenzmappe mit dem Logo des 'Airport Hotel Regent Frankfurt am Main'.",
-            category: "Reflexion & Branding",
+            x: 55,
+            y: 20,
+            width: 40,
+            height: 26,
+            label: "Mappe: Airport Hotel Regent Frankfurt",
+            description: "🏨 Dokument im Hintergrund: Auf dem Schreibtisch liegt eine Mappe mit dem Logo des 'Airport Hotel Regent Frankfurt' – der wahre Aufenthaltsort!",
+            category: "Dokumente & Branding",
             relevance: "Widerlegt Aussage 1 & 2 (Echter Standort)"
           }
         ],
@@ -314,7 +325,7 @@ window.TIKTOK_CASES = [
         id: "stmt-2",
         claim: "„Ich war am Sonntagvormittag auf dem offiziellen Modellflugplatz 40 km entfernt und habe nur anderen Piloten zugeschaut.“",
         isLie: true,
-        contradictionReason: "Im Hintergrund seines Videos steht der denkmalgeschützte achteckige Wasserturm des Moosbruchs, und der kurze Nord-Schatten beweist exakt 11:30 Uhr Sonnenhöchststand direkt im Naturschutzgebiet.",
+        contradictionReason: "Im Hintergrund seines Videos steht der denkmalgeschützte achteckige Ziegel-Wasserturm des Moosbruchs, und der kurze Nord-Schatten beweist exakt 11:30 Uhr Sonnenhöchststand direkt im Naturschutzgebiet.",
         requiredClues: ["clue-watertower-landmark", "clue-sundial-shadow"]
       }
     ],
@@ -329,7 +340,7 @@ window.TIKTOK_CASES = [
         shares: "22",
         music: "Electronic Chillstep Beat",
         caption: "Bester Flugtag heute! Chille noch kurz in der Sonne 🌲 #fpv #nature #sunday #flying",
-        sceneType: "park_watertower",
+        imageSrc: "assets/images/finn_park_watertower.jpg",
         audioTrack: {
           type: "telemetry",
           label: "🎧 Drohnen-Funk abspielen",
@@ -338,20 +349,20 @@ window.TIKTOK_CASES = [
         hotspots: [
           {
             id: "clue-watertower-landmark",
-            x: 74,
-            y: 16,
-            width: 24,
-            height: 35,
+            x: 40,
+            y: 8,
+            width: 22,
+            height: 32,
             label: "Historischer Wasserturm Moosbruch",
-            description: "🏰 Landmarke: Im Hintergrund ragt der markante achteckige Ziegel-Wasserturm von 'Moosbruch 1898' empor – mitten im Naturschutzgebiet und nicht auf dem 40 km entfernten Flugplatz!",
+            description: "🏰 Landmarke: Im Hintergrund ragt der markante achteckige Ziegel-Wasserturm von 'Moosbruch' empor – mitten im Naturschutzgebiet und nicht auf dem 40 km entfernten Flugplatz!",
             category: "Geodaten & Landmarken",
             relevance: "Widerlegt Aussage 2 (Standort Moosbruch statt Flugplatz)"
           },
           {
             id: "clue-sundial-shadow",
-            x: 35,
-            y: 65,
-            width: 25,
+            x: 18,
+            y: 58,
+            width: 36,
             height: 20,
             label: "Schattenwurf der Parkbank",
             description: "🧭 Sonnenstand & Schatten: Der Schatten der Bank fällt exakt kurz nach Norden – im Mai auf der Nordhalbkugel entspricht das genau dem Sonnenhöchststand um ca. 11:30–12:00 Uhr!",
@@ -360,12 +371,12 @@ window.TIKTOK_CASES = [
           },
           {
             id: "clue-drone-backpack",
-            x: 8,
-            y: 48,
-            width: 28,
+            x: 50,
+            y: 55,
+            width: 42,
             height: 30,
             label: "Drohne am Rucksack",
-            description: "🚁 Ausrüstung: An Finns Rucksack ist die montierte FPV-Drohne festgegurtet – mit frischen Schlammspritzern und Gras an den Propellern!",
+            description: "🚁 Ausrüstung: An Finns Rucksack ist die montierte FPV-Drohne mit grünen Propellern festgegurtet – mit frischen Schlammspritzern und Gras an den Rotoren!",
             category: "Gegenstände & Spuren",
             relevance: "Widerlegt Aussage 1 (Drohne nicht zerlegt im Schrank)"
           }

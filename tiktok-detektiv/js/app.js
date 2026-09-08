@@ -339,12 +339,12 @@ window.App = {
     if (btnPrev) btnPrev.style.opacity = this.currentVideoIndex > 0 ? '1' : '0.3';
     if (btnNext) btnNext.style.opacity = this.currentVideoIndex < this.currentCase.videos.length - 1 ? '1' : '0.3';
 
-    // Render Scene Visuals
+    // Render Scene Visuals with Photo
     const canvasContainer = document.getElementById('video-canvas-container');
     if (canvasContainer && window.VideoRenderer) {
       window.VideoRenderer.renderScene(video, canvasContainer, (hotspot) => {
         this.playSound('click');
-        this.openInspectorModal(hotspot);
+        this.openInspectorModal(hotspot, video);
       });
     }
 
@@ -385,7 +385,7 @@ window.App = {
     const bioEl = document.getElementById('profile-bio-text');
     if (bioEl) bioEl.textContent = suspect.bio;
 
-    // Render Video Grid
+    // Render Video Grid with real photo thumbnails
     const gridContainer = document.getElementById('profile-video-grid');
     if (gridContainer) {
       gridContainer.innerHTML = '';
@@ -394,10 +394,8 @@ window.App = {
         item.className = 'tt-grid-item';
         item.innerHTML = `
           ${idx === 0 ? '<div class="tt-grid-item-badge">📌 Pinned</div>' : ''}
-          <div style="flex: 1; display: flex; align-items: center; justify-content: center; font-size: 28px;">
-            ${idx === 0 ? '☕️' : idx === 1 ? '📱' : '🛹'}
-          </div>
-          <div class="tt-grid-item-views">▶ ${vid.views}</div>
+          <img src="${vid.imageSrc}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" alt="${vid.title}">
+          <div class="tt-grid-item-views" style="position: relative; z-index: 2; text-shadow: 0 1px 3px #000;">▶ ${vid.views}</div>
         `;
         item.addEventListener('click', () => {
           this.playSound('click');
@@ -509,7 +507,7 @@ window.App = {
     }
   },
 
-  openInspectorModal(clue) {
+  openInspectorModal(clue, video) {
     this.currentInspectedClue = clue;
     if (window.DetectiveBoard) window.DetectiveBoard.discoverClue(clue);
 
@@ -520,11 +518,29 @@ window.App = {
     const relevanceEl = document.getElementById('inspector-relevance');
     const audioBox = document.getElementById('inspector-audio-box');
     const buttonsContainer = document.getElementById('inspector-pin-buttons');
+    const previewContainer = document.getElementById('inspector-image-preview');
 
     if (titleEl) titleEl.textContent = clue.label || 'Beweisstück';
     if (catEl) catEl.textContent = clue.category || 'Indiz';
     if (descEl) descEl.textContent = clue.description || '';
     if (relevanceEl) relevanceEl.textContent = clue.relevance || '';
+
+    // Show image zoom preview if available
+    const activeVid = video || (this.currentCase && this.currentCase.videos[this.currentVideoIndex]);
+    if (previewContainer) {
+      if (activeVid && activeVid.imageSrc && clue.x !== undefined) {
+        previewContainer.style.display = 'block';
+        previewContainer.innerHTML = `
+          <div style="position: relative; width: 100%; height: 220px; border-radius: 12px; overflow: hidden; border: 1px solid #30363d; background: #000;">
+            <img src="${activeVid.imageSrc}" style="position: absolute; left: ${-clue.x * 2.5}%; top: ${-clue.y * 2.5}%; width: 350%; height: auto; object-fit: cover;" alt="Detail-Zoom">
+            <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.7); color: #25f4ee; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">🔍 Makro-Vergrößerung</div>
+          </div>
+        `;
+      } else {
+        previewContainer.style.display = 'none';
+        previewContainer.innerHTML = '';
+      }
+    }
 
     if (audioBox) {
       audioBox.style.display = clue.audioType ? 'flex' : 'none';
